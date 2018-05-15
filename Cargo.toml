@@ -1,0 +1,29 @@
+[package]
+name = "guessing_game"
+version = "0.1.0"
+authors = ["Ilia <ichimpoesh@gmail.com>"]
+
+[dependencies]
+
+rand = "0.3.14"
+
+[[bin]]
+name = "chapter3"
+path = "src/chapter3/bin/main.rs"
+
+[[bin]]
+name = "chapter5"
+path = "src/chapter5/bin/main.rs"
+
+[[bin]]
+name = "chapter6"
+path = "src/chapter6/bin/main.rs"
+
+
+[lib]
+name = "communicator"
+path = "src/communicator/lib/mod.rs"
+
+[[bin]]
+name = "chapter7"
+path = "src/chapter7/bin/main.rs"
