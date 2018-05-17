@@ -27,3 +27,7 @@ path = "src/communicator/lib/mod.rs"
 [[bin]]
 name = "chapter7"
 path = "src/chapter7/bin/main.rs"
+
+[[bin]]
+name = "collections"
+path = "src/collections/bin/main.rs"
