@@ -1,3 +1,6 @@
+use std::collections::HashMap;
+
+
 fn main() {
     let v: Vec<i32> = Vec::new();
     println!("{:?}", v);
@@ -17,7 +20,6 @@ fn main() {
     {
         let v = vec![1, 2, 3, 4];
         println!("{:?}", v);
-
     } // <- v goes out of scope and is freed here
 
     println!("{:?}", v);
@@ -63,7 +65,6 @@ fn main() {
     s.push(' ');
     s.push_str("bar");
     println!("{:?}", s);
-
 
 
     let mut s1 = String::from("foo");
@@ -118,5 +119,98 @@ fn main() {
     }
 
 
+    use std::collections::HashMap;
 
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Blue"), 25);
+    scores.insert(String::from("Yellow"), 50);
+    println!("{:?}", scores);
+
+    let score = scores.get("Blue");
+    println!("{:?}", score);
+
+    for (key, value) in &scores {
+        println!("{}: {}", key, value);
+    }
+
+
+    let teams = vec![String::from("Blue"), String::from("Yellow")];
+    let initial_scores = vec![10, 50];
+
+    let zipped = teams.iter().zip(initial_scores.iter());
+    let scores: HashMap<_, _> = zipped.collect();
+
+
+    let field_name = String::from("Favorite color");
+    let field_value = String::from("Blue");
+
+    let mut map = HashMap::new();
+    map.insert(field_name, field_value);
+    // field_name -> value used here after mov
+
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+
+    scores.entry(String::from("Yellow")).or_insert(50);
+    scores.entry(String::from("Blue")).or_insert(50);
+
+    println!("{:?}", scores);
+
+    let text = "hello world wonderful world";
+
+    let mut map = HashMap::new();
+
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        *count += 1;
+    }
+
+    println!("{:?}", map);
+
+    people_dep();
+
+    println!("{}", mean(&vec![1, 2, 3, 4]));
+    println!("{}", median(&mut vec![1, 2, 3, 4]));
+}
+
+fn mean(l: &Vec<usize>) -> f32 {
+    let mut t: f32 = 0.0;
+    for i in l {
+        t += (*i as f32);
+    }
+
+    t / (l.len() as f32)
+}
+
+fn median(l: &mut Vec<usize>) -> usize {
+    l.sort();
+    l[l.len() / 2]
+}
+
+fn people_dep() {
+    let mut p:HashMap<String, Vec<String>> = HashMap::new();
+
+    add(&mut p, String::from("X"), String::from("Tod"));
+    add(&mut p, String::from("X"), String::from("Ted"));
+    add(&mut p, String::from("S"), String::from("Ben"));
+    add(&mut p, String::from("S"), String::from("Ann"));
+
+    get_and_sort(&mut p, &String::from("X"));
+    get_and_sort(&mut p, &String::from("S"));
+}
+
+fn add(people: &mut HashMap<String, Vec<String>>, d: String, p: String) {
+    let v = people.entry(d).or_insert(vec![]);
+    v.push(p);
+}
+
+fn get_and_sort(people: &mut HashMap<String, Vec<String>>, dep: &String) {
+    if let Some(v) = people.get_mut(dep) {
+        v.sort();
+        println!("{:?}", v);
+    } else {
+        println!("not found");
+    }
 }
