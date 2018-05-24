@@ -35,3 +35,7 @@ path = "src/collections/bin/main.rs"
 [[bin]]
 name = "errors"
 path = "src/errors/bin/main.rs"
+
+[[bin]]
+name = "generics"
+path = "src/generics/bin/main.rs"
