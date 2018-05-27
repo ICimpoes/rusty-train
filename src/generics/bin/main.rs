@@ -10,7 +10,7 @@ fn main() {
     println!("The max number is {:?}", result);
 
     let empty: Vec<i32> = vec![];
-    let result: Option<&i32> = max(&empty);
+    let result: Option<i32> = max(&empty);
     println!("The max number is {:?}", result);
 
     let char_list = vec!['y', 'm', 'a', 'q'];
@@ -27,12 +27,20 @@ fn main() {
 
     let float = Point2 { x: "1", y: 4.0 };
     println!("{:?} {:?}", integer, float);
+
+    let p1 = Point { x: 1, y: 0 };
+    let p2 = Point { x: 2, y: 0 };
+    let p3 = Point { x: -1, y: 0 };
+
+    let v = vec![p1, p2, p3];
+
+    println!("{:?}", max(&v))
 }
 
-fn max<T: PartialOrd>(l: &[T]) -> Option<&T> {
-    let mut m = l.get(0)?;
+fn max<T: PartialOrd + Copy>(l: &[T]) -> Option<T> {
+    let mut m = *l.get(0)?;
 
-    for item in l.iter() {
+    for &item in l.iter() {
         if item > m {
             m = item
         }
@@ -67,6 +75,40 @@ struct Point<T> {
 impl<T> Point<T> {
     fn x(&self) -> &T {
         &self.x
+    }
+}
+
+impl<T: Clone> Clone for Point<T> {
+    fn clone(&self) -> Point<T> {
+        Point {
+            x: self.x.clone(),
+            y: self.y.clone(),
+        }
+    }
+}
+
+impl<T: Copy> Copy for Point<T> {}
+
+
+use std::cmp::Ordering;
+
+impl<T: PartialOrd> PartialOrd for Point<T> {
+    fn partial_cmp(&self, other: &Point<T>) -> Option<Ordering> {
+        let mut m: Option<Ordering> = Some(Ordering::Equal);
+        if &self.x > &other.x {
+            m = Some(Ordering::Greater);
+        }
+        if &self.x < &other.x {
+            m = Some(Ordering::Less);
+        }
+
+        m
+    }
+}
+
+impl<T: PartialEq> PartialEq for Point<T> {
+    fn eq(&self, other: &Point<T>) -> bool {
+        &self.x == &other.x
     }
 }
 

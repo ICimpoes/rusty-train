@@ -5,7 +5,7 @@ authors = ["Ilia <ichimpoesh@gmail.com>"]
 
 [dependencies]
 
-rand = "0.3.14"
+rand = "0.4.2"
 
 [[bin]]
 name = "chapter3"
@@ -39,3 +39,7 @@ path = "src/errors/bin/main.rs"
 [[bin]]
 name = "generics"
 path = "src/generics/bin/main.rs"
+
+[[bin]]
+name = "traits"
+path = "src/traits/bin/main.rs"
