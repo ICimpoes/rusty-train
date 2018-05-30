@@ -43,3 +43,7 @@ path = "src/generics/bin/main.rs"
 [[bin]]
 name = "traits"
 path = "src/traits/bin/main.rs"
+
+[[bin]]
+name = "lifetimes"
+path = "src/lifetimes/bin/main.rs"
