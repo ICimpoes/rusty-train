@@ -19,7 +19,6 @@ path = "src/chapter5/bin/main.rs"
 name = "chapter6"
 path = "src/chapter6/bin/main.rs"
 
-
 [lib]
 name = "communicator"
 path = "src/communicator/lib/mod.rs"
