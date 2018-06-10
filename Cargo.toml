@@ -46,3 +46,7 @@ path = "src/traits/bin/main.rs"
 [[bin]]
 name = "lifetimes"
 path = "src/lifetimes/bin/main.rs"
+
+[[bin]]
+name = "minigrep"
+path = "src/minigrep/bin/main.rs"
